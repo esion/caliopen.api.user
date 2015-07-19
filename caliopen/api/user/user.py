@@ -29,11 +29,25 @@ class AuthenticationAPI(Api):
 
     @view(renderer='json', permission=NO_PERMISSION_REQUIRED)
     def collection_post(self):
-        """
-        Api for user authentication.
+        """Api for user authentication.
 
-        Store generated tokens in a cache entry related to user_id
-        and return a structure with this tokens for client usage.
+        Parameters:
+            username: Caliopen user name
+            password: User password
+
+        Return:
+            A dict with user informations and tokens, for example:
+
+            {'user_id': '1234-5678-4321-4321',
+             'user_name': 'test',
+             'tokens': {
+                'access_token': 'azerty',
+                'refresh_token': 'azerty',
+                'expires_in': 3600}}
+
+        Raises:
+            HTTPBadRequest: input parameters are not valid
+
         """
         params = self.request.params
         user = User.authenticate(params['username'], params['password'])

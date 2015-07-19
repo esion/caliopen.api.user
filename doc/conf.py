@@ -58,6 +58,7 @@ sys.path.insert(0, os.path.abspath(cornice.__file__))
 extensions = [
     'sphinx.ext.autodoc',
     'cornice.ext.sphinxext',
+    'sphinx.ext.napoleon',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
