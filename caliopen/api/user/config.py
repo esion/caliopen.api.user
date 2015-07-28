@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 
-from .authentication import AuthenticationPolicy, AuthorizationPolicy
+from .security import AuthenticationPolicy, AuthorizationPolicy
 
 log = logging.getLogger(__name__)
 
