@@ -38,6 +38,15 @@ class Contact(Api):
 
     @view(renderer='json', permission='authenticated')
     def collection_get(self):
+        """Retrieve and search contacts.
+
+        Returns:
+            list: list of `ReturnIndexShortContact`
+
+        Raises:
+            HTTPBadRequest: input parameters are not valid
+        """
+
         results = CoreContact.find_index(self.user, None,
                                          limit=self.get_limit(),
                                          offset=self.get_offset())
@@ -47,6 +56,17 @@ class Contact(Api):
 
     @view(renderer='json', permission='authenticated')
     def get(self):
+        """Retrieve a contact by its uuid.
+
+        Args:
+            contact_id: uuid of contact to retrieve
+
+        Returns:
+            ReturnContact: contact retrieved
+
+        Raises:
+            HTTPBadRequest: input parameters are not valid
+        """
         contact_id = self.request.matchdict.get('contact_id')
         try:
             contact = CoreContact.get(self.user, contact_id)
@@ -56,7 +76,16 @@ class Contact(Api):
 
     @view(renderer='json', permission='authenticated')
     def collection_post(self):
-        """Create a new contact from json post data structure."""
+        """Create a new contact.
+
+        Args:
+            `: structure describing contact to create
+        Returns:
+            `: contact created
+
+        Raises:
+            HTTPBadRequest: input parameters are not valid
+        """
         data = self.request.json
         contact_param = NewContact(data)
         try:
